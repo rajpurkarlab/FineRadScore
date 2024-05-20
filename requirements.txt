@@ -1,0 +1,4 @@
+anthropic==0.25.8
+openai==1.28.1
+pandas==2.2.2
+tqdm==4.66.4

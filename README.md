@@ -27,10 +27,10 @@ Run `export ANTHROPIC_API_KEY=<api key>` to add your Anthropic API key.
 
 Run `python run_refisco_experiments.py <version> <setting> <model>`
 - version: v0, v1
-- setting: zeroshot, original, perturbed, paraphrased
+- setting: zeroshot, original, shuffled, paraphrased
 - model: gpt4, claude3
 
-Original, perturbed, and paraphrased settings are all using the few-shot prompt. For example, `python run_refisco_experiments.py v1 original gpt4`.
+Original, shuffled, and paraphrased settings are all using the few-shot prompt. For example, `python run_refisco_experiments.py v1 original gpt4`.
 
 ## Run Experiments on ReXVal datasets
 

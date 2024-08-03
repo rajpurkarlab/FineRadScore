@@ -88,8 +88,8 @@ def run_refisco_experiment(version, setting, model):
     else:
         pred_gt_df = pd.read_csv(f"datasets/refisco-{version}-input.csv")
     
-    if setting == "perturbed":
-        GROUND_TRUTH_COLUMN = "perturbed_ground_truth"
+    if setting == "shuffled":
+        GROUND_TRUTH_COLUMN = "shuffled_ground_truth"
     else:
         GROUND_TRUTH_COLUMN = "annotator_ground_truth"
 
@@ -107,7 +107,7 @@ def main():
     model = sys.argv[3]
 
     assert version in ["v0", "v1"]
-    assert setting in ["zeroshot", "original", "perturbed", "paraphrased"]
+    assert setting in ["zeroshot", "original", "shuffled", "paraphrased"]
     assert model in ["gpt4", "claude3"]
 
     run_refisco_experiment(version, setting, model)

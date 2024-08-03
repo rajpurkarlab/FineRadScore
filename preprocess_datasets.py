@@ -184,9 +184,9 @@ def consolidate_pred_gt_v1():
     return consolidated_df
 
 
-# add perturbed (aka shuffling) of sentences in ground truth report
-def consolidate_pred_gt_perturbed(data_df, OUT_FILE):
-    perturbed_ground_truths = []
+# add shuffling of sentences in ground truth report
+def consolidate_pred_gt_shuffled(data_df, OUT_FILE):
+    shuffled_ground_truths = []
     for ground_truth in data_df['annotator_ground_truth']:
         sentences = re.split(r'(?<!\d)\.(?!\d|$) ', ground_truth)
         if '' in sentences:
@@ -196,18 +196,18 @@ def consolidate_pred_gt_perturbed(data_df, OUT_FILE):
         
         random.shuffle(sentences)
 
-        perturbed_ground_truth = '. '.join(sentences)
+        shuffled_ground_truth = '. '.join(sentences)
         # some postprocessing
-        perturbed_ground_truth = perturbed_ground_truth.replace('..', '.')
-        while perturbed_ground_truth[-1] == ' ':
-            perturbed_ground_truth = perturbed_ground_truth[:-1]
+        shuffled_ground_truth = shuffled_ground_truth.replace('..', '.')
+        while shuffled_ground_truth[-1] == ' ':
+            shuffled_ground_truth = shuffled_ground_truth[:-1]
         
-        if perturbed_ground_truth[-1] != '.':
-            perturbed_ground_truth += '.'
+        if shuffled_ground_truth[-1] != '.':
+            shuffled_ground_truth += '.'
         
-        perturbed_ground_truths.append(perturbed_ground_truth)
+        shuffled_ground_truths.append(shuffled_ground_truth)
     
-    data_df['perturbed_ground_truth'] = perturbed_ground_truths
+    data_df['shuffled_ground_truth'] = shuffled_ground_truths
     data_df.to_csv(OUT_FILE)
 
 
@@ -217,8 +217,8 @@ def main():
     preprocess_refisco_v1("datasets/refisco-v1_preprocessed.csv")
     refisco_v0 = consolidate_pred_gt_v0()
     refisco_v1 = consolidate_pred_gt_v1()
-    consolidate_pred_gt_perturbed(refisco_v0, "datasets/refisco-v0-input.csv")
-    consolidate_pred_gt_perturbed(refisco_v1, "datasets/refisco-v1-input.csv")
+    consolidate_pred_gt_shuffled(refisco_v0, "datasets/refisco-v0-input.csv")
+    consolidate_pred_gt_shuffled(refisco_v1, "datasets/refisco-v1-input.csv")
     print("Preprocessing complete.")
 
 if __name__=="__main__":
